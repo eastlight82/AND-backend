@@ -1,0 +1,3 @@
+package com.and_backend.enums;
+
+public enum LossReason { PARTNER_LOST_FEELINGS, I_LOST_FEELINGS, PERSONALITY_GAP, BETRAYAL, SITUATIONAL, UNKNOWN}
