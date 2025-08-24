@@ -31,6 +31,6 @@ public class LossCase {
 
     @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id", insertable=false, updatable=false)
+    @JoinColumn(name="UsersId", insertable=false, updatable=false)
     private Users users;
 }

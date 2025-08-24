@@ -14,6 +14,6 @@ public class PreTestQ {
     private Integer score;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy loading
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "lossCaseId", nullable = false)
     private LossCase lossCase;
 }

@@ -1,6 +1,5 @@
-package com.and_backend.home.qna.qnaA;
+package com.and_backend.home.qna;
 
-import com.and_backend.home.qna.qnaQ.QnaQ;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +12,6 @@ public class QnaA {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "qnaQId", nullable = false)
     private QnaQ qnaQ;
 }

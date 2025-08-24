@@ -1,6 +1,5 @@
-package com.and_backend.home.chat.chatMessage;
+package com.and_backend.home.chat;
 
-import com.and_backend.home.chat.chatRoom.ChatRoom;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -16,6 +15,6 @@ public class ChatMessage {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"id\"", nullable = false)
+    @JoinColumn(name = "\"chatRoomId\"", nullable = false)
     private ChatRoom chatRoom;
 }

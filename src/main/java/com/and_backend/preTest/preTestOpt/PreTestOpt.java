@@ -11,6 +11,6 @@ public class PreTestOpt {
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "preTestId", nullable = false)
     private PreTestQ preTestQ;
 }

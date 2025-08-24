@@ -13,6 +13,6 @@ public class Quest {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "lossCaseId", nullable = false)
     private LossCase lossCase;
 }
