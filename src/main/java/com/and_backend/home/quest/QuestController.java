@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/quests") @RequiredArgsConstructor
+@RequestMapping("/quests") @RequiredArgsConstructor
 public class QuestController {
     private final QuestService service;
 

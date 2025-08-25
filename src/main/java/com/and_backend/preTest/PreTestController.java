@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/pretest") @RequiredArgsConstructor
+@RequestMapping("/pretest") @RequiredArgsConstructor
 public class PreTestController {
     private final PreTestService service;
 
