@@ -1,16 +1,15 @@
-package com.and_backend.preTest.preTestOpt;
+package com.and_backend.preTest;
 
-import com.and_backend.preTest.preTestQ.PreTestQ;
 import jakarta.persistence.*;
 
 @Entity @Table(name = "preTestOpt")
 public class PreTestOpt {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long preTestOptId;
 
     private String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "preTestId", nullable = false)
+    @JoinColumn(name = "preTestQId", nullable = false)
     private PreTestQ preTestQ;
 }

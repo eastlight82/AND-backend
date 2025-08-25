@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class LossCase {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long lossCaseId;
 
     // 예시: enum 등은 String 컬럼이라고 가정
     private LossSubject subject;
