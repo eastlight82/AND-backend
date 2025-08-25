@@ -8,7 +8,7 @@ import lombok.*;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder//Lombok
 public class Users {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long usersId;
 
     private String email;
     private String pw;
