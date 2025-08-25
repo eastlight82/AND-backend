@@ -29,8 +29,7 @@ public class LossCase {
     @Column(name="photo")
     private byte[] photo;
 
-    @MapsId("id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="UsersId", insertable=false, updatable=false)
+    @JoinColumn(name="usersId", insertable=false, updatable=false)
     private Users users;
 }
