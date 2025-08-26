@@ -3,12 +3,15 @@ package com.and_backend.users;
 import com.and_backend.repository.UsersRepository;
 import com.and_backend.users.dto.*;
 import com.and_backend.users.security.JwtUtil;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -16,7 +19,10 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtil;
 
+    @Transactional
     public UserResponse signup(SignupRequest req) {
+        log.info("signup start email={}", req.email());
+
         if (users.existsByEmail(req.email())) {
             throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
         }
@@ -27,7 +33,8 @@ public class AuthService {
                 .age(req.age())
                 .gender(req.gender())
                 .build();
-        users.save(u);
+        Users saved = users.save(u);
+        log.info("signup ok id={}", saved.getUsersId());
         return new UserResponse(u.getUsersId(), u.getEmail(), u.getName(), u.getAge(), u.getGender());
     }
 
