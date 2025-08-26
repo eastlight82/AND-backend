@@ -11,7 +11,7 @@ public class Users {
     private Long usersId;
 
     private String email;
-    private String pw;
+    private String password;
     private String name;
     private Integer age;
     private String gender;

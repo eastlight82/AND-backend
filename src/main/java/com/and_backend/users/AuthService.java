@@ -22,7 +22,7 @@ public class AuthService {
         }
         Users u = Users.builder()
                 .email(req.email())
-                .pw(encoder.encode(req.password()))
+                .password(encoder.encode(req.password()))
                 .name(req.name())
                 .age(req.age())
                 .gender(req.gender())
@@ -34,7 +34,7 @@ public class AuthService {
     public AuthResponse login(LoginRequest req) {
         var u = users.findByEmail(req.email())
                 .orElseThrow(() -> new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다."));
-        if (!encoder.matches(req.password(), u.getPw())) {
+        if (!encoder.matches(req.password(), u.getPassword())) {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다.");
         }
         String token = jwtUtil.generate(u.getEmail(), Map.of("uid", u.getUsersId()));

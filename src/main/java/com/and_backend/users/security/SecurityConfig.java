@@ -32,7 +32,7 @@ public class SecurityConfig {
                 // /, /error에 접근 가능해야 403 루프 끊김
                 .requestMatchers("/actuator/health","/swagger-ui/**", "/v3/api-docs/**",
                     "/", "/error", "favicon.ico", "/css/**", "js/**", "/images/**").permitAll()
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/auth/login", "auth/signup", "auth/me").permitAll()
                 .anyRequest().authenticated()
         )
         // req-> 401 unauthorized로 resp
