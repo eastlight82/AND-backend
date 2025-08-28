@@ -12,6 +12,13 @@ public class Quest {
 
     private String text;
 
+    @Column(columnDefinition = "boolean type false")
+    private boolean completed;
+
+    public void toggleCompleted() {
+        this.completed = !this.completed;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lossCaseId", nullable = false)
     private LossCase lossCase;

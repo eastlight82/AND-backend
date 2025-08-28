@@ -1,5 +1,6 @@
 package com.and_backend.home.quest;
 
+import com.and_backend.home.quest.dto.QuestCheckRequest;
 import com.and_backend.home.quest.dto.QuestCreateRequest;
 import com.and_backend.home.quest.dto.QuestResponse;
 import com.and_backend.home.quest.dto.QuestUpdateRequest;
@@ -29,6 +30,13 @@ public class QuestService {
     public QuestResponse update(Long questId, QuestUpdateRequest req){
         var q = questRepo.findById(questId).orElseThrow();
         q.setText(req.text());
+        return QuestResponse.from(questRepo.save(q));
+    }
+
+    public QuestResponse toggle(Long questId, QuestCheckRequest req){
+        var q= questRepo.findById(questId).orElseThrow();
+        q.toggleCompleted();
+
         return QuestResponse.from(questRepo.save(q));
     }
 

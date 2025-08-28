@@ -11,8 +11,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity @Table(name = "lossCase")
-@Getter
-@Setter
+@Getter @Setter
 public class LossCase {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,4 +31,9 @@ public class LossCase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="usersId")
     private Users users;
+
+    protected LossCase(){}; //default constructor
+    public LossCase(Long id){
+        this.lossCaseId=id;
+    }
 }

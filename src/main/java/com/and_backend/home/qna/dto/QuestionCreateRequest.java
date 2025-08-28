@@ -1,0 +1,8 @@
+package com.and_backend.home.qna.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record QuestionCreateRequest(@NotBlank String text,
+                                    @NotNull Long lossCaseId) {
+}

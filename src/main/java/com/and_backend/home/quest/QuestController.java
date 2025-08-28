@@ -1,5 +1,6 @@
 package com.and_backend.home.quest;
 
+import com.and_backend.home.quest.dto.QuestCheckRequest;
 import com.and_backend.home.quest.dto.QuestCreateRequest;
 import com.and_backend.home.quest.dto.QuestResponse;
 import com.and_backend.home.quest.dto.QuestUpdateRequest;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequestMapping("/quests") @RequiredArgsConstructor
 public class QuestController {
     private final QuestService service;
+    private final QuestService questService;
 
     @PostMapping
     public QuestResponse create(@RequestBody @Valid QuestCreateRequest req){
@@ -33,4 +35,10 @@ public class QuestController {
     public void delete(@PathVariable Long questId){
         service.delete(questId);
     }
+
+    @PutMapping("/{questId}")
+    public QuestResponse toggleChecked(@PathVariable Long questId, @RequestBody QuestCheckRequest req){
+        return questService.toggle(questId, req);
+    }
+
 }
