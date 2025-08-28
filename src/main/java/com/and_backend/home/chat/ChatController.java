@@ -1,7 +1,12 @@
 package com.and_backend.home.chat;
 
+import com.and_backend.home.chat.dto.ChatMessageCreateRequest;
+import com.and_backend.home.chat.dto.ChatMessageResponse;
+import com.and_backend.home.chat.dto.ChatRoomCreateRequest;
+import com.and_backend.home.chat.dto.ChatRoomResponse;
 import com.and_backend.lossCase.LossCase;
 import com.and_backend.lossCase.LossCaseService;
+import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,24 +20,21 @@ public class ChatController {
     private final LossCaseService lossCaseService;
 
     @PostMapping("/rooms")
-    public ChatRoom createRoom(@RequestParam Long lossCaseId) {
-        LossCase lc = lossCaseService.get(lossCaseId);
-        return chatService.createRoom(lc);
+    public ChatRoomResponse createRoom(@RequestParam Long lossCaseId, @RequestBody ChatRoomCreateRequest req) {
+        return chatService.createRoom(req);
     }
 
     @PostMapping("/rooms/{roomId}/messages")
-    public ChatMessage updateMsg(@PathVariable Long roomId, @RequestBody SendReq req) {
-        return chatService.updateMsg(roomId, req.sender, req.text);
+    public ChatMessageResponse addMessage(@PathVariable Long roomId,
+                                          @Valid @RequestBody ChatMessageCreateRequest req) {
+        return chatService.addMessage(roomId, req);
     }
 
     @GetMapping("/rooms/{roomId}/messages")
-    public List<ChatMessage> list(@PathVariable Long roomId) {
+    public List<ChatMessageResponse> list(@PathVariable Long roomId) {
         return chatService.list(roomId);
     }
 
     @PostMapping("/rooms/{roomId}/close")
-    public ChatRoom close(@PathVariable Long roomId) { return chatService.close(roomId); }
-
-    @Data
-    static class SendReq { String sender; String text; }
+    public ChatRoomResponse close(@PathVariable Long roomId) { return chatService.close(roomId); }
 }
