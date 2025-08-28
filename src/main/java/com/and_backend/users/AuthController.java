@@ -8,7 +8,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth") @RequiredArgsConstructor
@@ -32,4 +35,15 @@ public class AuthController {
         // 실서비스라면 email로 User를 다시 조회해 최신 정보를 리턴
         return ResponseEntity.ok(new UserResponse(null, authentication.getName(), null, null, null));
     }
+
+    @GetMapping("/auth/whoami")
+    public Map<String, Object> whoami(@AuthenticationPrincipal Object principal, Authentication authentication) {
+        return Map.of(
+                "principalClass", principal == null ? null : principal.getClass().getName(),
+                "principal", principal,
+                "authClass", authentication == null ? null : authentication.getClass().getName(),
+                "isAuthenticated", authentication != null && authentication.isAuthenticated()
+        );
+    }
+
 }

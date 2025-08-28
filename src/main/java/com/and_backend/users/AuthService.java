@@ -45,6 +45,7 @@ public class AuthService {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다.");
         }
         String token = jwtUtil.generate(u.getEmail(), Map.of("uid", u.getUsersId()));
+
         return new AuthResponse(token, "Bearer",
                 new UserResponse(u.getUsersId(), u.getEmail(), u.getName(), u.getAge(), u.getGender()));
     }

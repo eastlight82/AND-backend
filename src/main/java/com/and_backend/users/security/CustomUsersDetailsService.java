@@ -1,11 +1,15 @@
 package com.and_backend.users.security;
 
 import com.and_backend.repository.UsersRepository;
+import com.and_backend.users.Users;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -13,13 +17,10 @@ public class CustomUsersDetailsService implements UserDetailsService {
     private final UsersRepository usersRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        var u = usersRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users u = usersRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return org.springframework.security.core.userdetails.User
-                .withUsername(u.getEmail())
-                .password(u.getPassword())  // hashed
-                .authorities("ROLE_USER")
-                .build();
+        return new CustomUser(u.getUsersId(), u.getEmail(), u.getPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }

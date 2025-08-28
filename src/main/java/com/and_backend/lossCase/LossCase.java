@@ -30,6 +30,6 @@ public class LossCase {
     private byte[] photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="usersId", insertable=false, updatable=false)
+    @JoinColumn(name="usersId")
     private Users users;
 }
