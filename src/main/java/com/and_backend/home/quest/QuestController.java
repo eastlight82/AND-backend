@@ -36,8 +36,8 @@ public class QuestController {
         service.delete(questId);
     }
 
-    @PutMapping("/{questId}")
-    public QuestResponse toggleChecked(@PathVariable Long questId, @RequestBody QuestCheckRequest req){
+    @PatchMapping("/{questId}")
+    public QuestResponse toggleCompleted(@PathVariable Long questId, @RequestBody QuestCheckRequest req){
         return questService.toggle(questId, req);
     }
 

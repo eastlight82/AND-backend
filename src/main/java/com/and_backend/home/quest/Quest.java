@@ -12,8 +12,8 @@ public class Quest {
 
     private String text;
 
-    @Column(columnDefinition = "boolean type false")
-    private boolean completed;
+    @Column
+    private boolean completed= false;
 
     public void toggleCompleted() {
         this.completed = !this.completed;
