@@ -22,7 +22,6 @@ public class LossCase {
     private LossSubject subject;
     @Enumerated(EnumType.STRING)
     private WithTime withTime;
-    @Enumerated(EnumType.STRING)
     private LocalDate lossDate;
     @Enumerated(EnumType.STRING)
     private LossReason lossReason;
