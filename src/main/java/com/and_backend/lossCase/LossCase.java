@@ -1,9 +1,6 @@
 package com.and_backend.lossCase;
 
-import com.and_backend.enums.CopeWay;
-import com.and_backend.enums.LossReason;
-import com.and_backend.enums.LossSubject;
-import com.and_backend.enums.WithTime;
+import com.and_backend.enums.*;
 import com.and_backend.users.Users;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +24,8 @@ public class LossCase {
     private LossReason lossReason;
     @Enumerated(EnumType.STRING)
     private CopeWay copeWay;
+    @Enumerated(EnumType.STRING)
+    private LossSubjectFamily subjectFamily;
 
     @Lob
     @Column(name="photo")

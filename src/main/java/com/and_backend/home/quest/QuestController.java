@@ -21,7 +21,7 @@ public class QuestController {
     }
 
     @GetMapping
-    public List<QuestResponse> list(@RequestParam Long lossCaseId){
+    public List<QuestResponse> getOne(@RequestParam Long lossCaseId){
         return service.listByLossCase(lossCaseId);
     }
 
