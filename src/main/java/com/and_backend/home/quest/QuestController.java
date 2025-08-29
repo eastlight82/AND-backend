@@ -3,7 +3,6 @@ package com.and_backend.home.quest;
 import com.and_backend.home.quest.dto.QuestCheckRequest;
 import com.and_backend.home.quest.dto.QuestCreateRequest;
 import com.and_backend.home.quest.dto.QuestResponse;
-import com.and_backend.home.quest.dto.QuestUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +23,6 @@ public class QuestController {
     @GetMapping
     public List<QuestResponse> list(@RequestParam Long lossCaseId){
         return service.listByLossCase(lossCaseId);
-    }
-
-    @PutMapping("/{questId}")
-    public QuestResponse update(@PathVariable Long questId, @RequestBody QuestUpdateRequest req){
-        return service.update(questId, req);
     }
 
     @DeleteMapping("/{questId}")

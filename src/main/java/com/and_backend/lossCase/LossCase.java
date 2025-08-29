@@ -18,10 +18,15 @@ public class LossCase {
     private Long lossCaseId;
 
     // 예시: enum 등은 String 컬럼이라고 가정
+    @Enumerated(EnumType.STRING)
     private LossSubject subject;
+    @Enumerated(EnumType.STRING)
     private WithTime withTime;
+    @Enumerated(EnumType.STRING)
     private LocalDate lossDate;
+    @Enumerated(EnumType.STRING)
     private LossReason lossReason;
+    @Enumerated(EnumType.STRING)
     private CopeWay copeWay;
 
     @Lob

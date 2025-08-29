@@ -10,7 +10,9 @@ public class Quest {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questId;
 
-    private String text;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quest_bank_id", nullable = false)
+    private QuestBank questBank;
 
     @Column
     private boolean completed= false;
@@ -20,6 +22,6 @@ public class Quest {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lossCaseId", nullable = false)
+    @JoinColumn(name = "loss_case_id", nullable = false)
     private LossCase lossCase;
 }

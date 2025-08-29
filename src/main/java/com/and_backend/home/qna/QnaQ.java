@@ -10,7 +10,9 @@ public class QnaQ {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long QnaQId;
 
-    private String text;
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name= "qnaqBankId", nullable = false)
+    private QnaQBank qnaQBank;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lossCaseId", nullable = false)

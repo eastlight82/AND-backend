@@ -3,8 +3,8 @@ package com.and_backend.home.quest;
 import com.and_backend.home.quest.dto.QuestCheckRequest;
 import com.and_backend.home.quest.dto.QuestCreateRequest;
 import com.and_backend.home.quest.dto.QuestResponse;
-import com.and_backend.home.quest.dto.QuestUpdateRequest;
 import com.and_backend.repository.LossCaseRepository;
+import com.and_backend.repository.QuestBankRepository;
 import com.and_backend.repository.QuestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,21 +16,22 @@ import java.util.List;
 public class QuestService {
     private final QuestRepository questRepo;
     private final LossCaseRepository lossCaseRepo;
+    private final QuestBankRepository questBankRepo;
 
-    public QuestResponse create(QuestCreateRequest req){
-        var lc = lossCaseRepo.findById(req.lossCaseId()).orElseThrow();
-        var q = questRepo.save(Quest.builder().lossCase(lc).text(req.text()).build());
-        return QuestResponse.from(q);
+    public QuestResponse create(QuestCreateRequest req) { //기존 text대신 questBankId로
+        var lossCase = lossCaseRepo.findById(req.lossCaseId()).orElseThrow();
+        var questBank = questBankRepo.findById(req.questBankId()).orElseThrow();
+
+        var quest = Quest.builder()
+                .lossCase(lossCase)
+                .questBank(questBank)
+                .build();
+
+        return QuestResponse.from(questRepo.save(quest));
     }
 
     public List<QuestResponse> listByLossCase(Long lossCaseId){
         return questRepo.findByLossCase_LossCaseId(lossCaseId).stream().map(QuestResponse::from).toList();
-    }
-
-    public QuestResponse update(Long questId, QuestUpdateRequest req){
-        var q = questRepo.findById(questId).orElseThrow();
-        q.setText(req.text());
-        return QuestResponse.from(questRepo.save(q));
     }
 
     public QuestResponse toggle(Long questId, QuestCheckRequest req){
