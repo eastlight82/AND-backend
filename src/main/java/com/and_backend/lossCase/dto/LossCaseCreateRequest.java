@@ -1,9 +1,6 @@
 package com.and_backend.lossCase.dto;
 
-import com.and_backend.enums.CopeWay;
-import com.and_backend.enums.LossReason;
-import com.and_backend.enums.LossSubject;
-import com.and_backend.enums.WithTime;
+import com.and_backend.enums.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -14,5 +11,6 @@ public record LossCaseCreateRequest(
         @NotNull LocalDate lossDate,
         @NotNull LossReason lossReason,
         @NotNull CopeWay copeWay,
+        LossSubjectFamily lossSubjectFamily,
         String photoBase64 // null 허용
 ) {}

@@ -1,9 +1,6 @@
 package com.and_backend.lossCase.dto;
 
-import com.and_backend.enums.CopeWay;
-import com.and_backend.enums.LossReason;
-import com.and_backend.enums.LossSubject;
-import com.and_backend.enums.WithTime;
+import com.and_backend.enums.*;
 import com.and_backend.lossCase.LossCase;
 
 import java.time.LocalDate;
@@ -14,7 +11,8 @@ public record LossCaseDto(
         WithTime withTime,
         LocalDate lossDate,
         LossReason lossReason,
-        CopeWay copeWay
+        CopeWay copeWay,
+        LossSubjectFamily lossSubjectFamily
 ) {
     public static LossCaseDto of(LossCase entity) {
         return new LossCaseDto(
@@ -23,7 +21,8 @@ public record LossCaseDto(
                 entity.getWithTime(),
                 entity.getLossDate(),
                 entity.getLossReason(),
-                entity.getCopeWay()
+                entity.getCopeWay(),
+                entity.getSubjectFamily()
         );
     }
 }

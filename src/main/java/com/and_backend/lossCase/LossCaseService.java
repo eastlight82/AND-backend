@@ -32,6 +32,7 @@ public class LossCaseService {
         lc.setLossReason(req.lossReason());
         lc.setCopeWay(req.copeWay());
         lc.setUsers(user);
+        lc.setSubjectFamily(req.lossSubjectFamily());
 
         if (req.photoBase64() != null && !req.photoBase64().isBlank()) {
             lc.setPhoto(Base64.getDecoder().decode(req.photoBase64()));
@@ -73,6 +74,7 @@ public class LossCaseService {
         if (req.lossDate() != null) lc.setLossDate(req.lossDate());
         if (req.lossReason() != null) lc.setLossReason(req.lossReason());
         if (req.copeWay() != null) lc.setCopeWay(req.copeWay());
+        lc.setSubjectFamily(req.lossSubjectFamily());
 
         if (req.photoBase64() != null) {
             if (req.photoBase64().isBlank()) {
