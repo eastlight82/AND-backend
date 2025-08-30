@@ -16,12 +16,14 @@ public class QuestController {
     private final QuestService questService;
 
     @PostMapping
-    public QuestResponse create(@RequestBody @Valid QuestCreateRequest req){
-        return service.create(req);
+    public List<QuestResponse> create(@RequestBody QuestCreateRequest req) {
+        return questService.createThreeQuests(req).stream()
+                .map(q -> new QuestResponse(q.getQuestId(), q.getQuestBank().getText()))
+                .toList();
     }
 
     @GetMapping
-    public List<QuestResponse> getOne(@RequestParam Long lossCaseId){
+    public List<QuestResponse> get(@RequestParam Long lossCaseId){
         return service.listByLossCase(lossCaseId);
     }
 

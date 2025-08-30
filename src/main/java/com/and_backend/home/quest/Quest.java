@@ -1,5 +1,6 @@
 package com.and_backend.home.quest;
 
+import com.and_backend.enums.*;
 import com.and_backend.lossCase.LossCase;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,6 +14,10 @@ public class Quest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_bank_id", nullable = false)
     private QuestBank questBank;
+
+    private String text;
+    private LossSubject subject;
+    private CopeWay copeway;
 
     @Column
     private boolean completed= false;

@@ -24,4 +24,5 @@ public class QuestBank {
 
     @OneToMany(mappedBy = "questBank")
     private List<Quest> quests = new ArrayList<>();
+
 }
