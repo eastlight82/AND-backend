@@ -1,3 +1,6 @@
 package com.and_backend.enums;
 
-public enum LossSubject { LOVER, PET, FRIEND, FAMILY }
+import java.util.Arrays;
+
+public enum LossSubject { LOVER, PET, FRIEND, FAMILY;
+}

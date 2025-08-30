@@ -16,7 +16,9 @@ public class Quest {
     private QuestBank questBank;
 
     private String text;
+    @Enumerated(EnumType.STRING)
     private LossSubject subject;
+    @Enumerated(EnumType.STRING)
     private CopeWay copeway;
 
     @Column

@@ -5,7 +5,6 @@ import com.and_backend.home.qna.dto.AnswerResponse;
 import com.and_backend.home.qna.dto.QuestionResponse;
 import com.and_backend.home.qna.dto.QuestionCreateRequest;
 import jakarta.validation.Valid;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,12 @@ public class QnaController {
     private final QnaService service;
 
     @PostMapping("/questions")
-    public QuestionResponse addQuestion(@RequestBody @Valid QuestionCreateRequest req) { return service.addQuestion(req); }
+    public QuestionResponse createQuestion(@RequestBody @Valid QuestionCreateRequest req) { return service.createQuestion(req); }
+
+    @GetMapping("/questions")
+    public QuestionResponse getQuestion(@RequestParam Long lossCaseId) {
+        return service.getQuestionByLossCase(lossCaseId);
+    }
 
     @PostMapping("/questions/{qId}/answers")
     public AnswerResponse addAnswer(@PathVariable Long qId, @RequestBody @Valid AnswerCreateRequest req) {

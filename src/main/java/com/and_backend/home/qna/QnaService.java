@@ -4,8 +4,6 @@ import com.and_backend.home.qna.dto.AnswerCreateRequest;
 import com.and_backend.home.qna.dto.AnswerResponse;
 import com.and_backend.home.qna.dto.QuestionCreateRequest;
 import com.and_backend.home.qna.dto.QuestionResponse;
-import com.and_backend.home.quest.Quest;
-import com.and_backend.home.quest.dto.QuestResponse;
 import com.and_backend.lossCase.LossCase;
 import com.and_backend.repository.LossCaseRepository;
 import com.and_backend.repository.QnaARepository;
@@ -26,16 +24,26 @@ public class QnaService {
     private final LossCaseRepository lRepo;
     private final QnaQBankRepository qBankRepo;
 
-    public QuestionResponse addQuestion(QuestionCreateRequest req) {
-        var lossCase= lRepo.findById(req.lossCaseId()).orElseThrow();
-        var qnaQBank= qBankRepo.findById(req.qnaQBankId()).orElseThrow();
+    @Transactional
+    public QuestionResponse createQuestion(QuestionCreateRequest req) {
+        var lossCase= lRepo.findById(req.lossCaseId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상실 케이스입니다."));
+        var bank= qBankRepo.pickRandom(lossCase.getSubject()!=null ? lossCase.getSubject().name() : null);
 
-        var q = QnaQ.builder()
+        QnaQ q = QnaQ.builder()
+                .qnaQBank(bank)
+                .text(bank.getText())
+                .subject(bank.getSubject())
                 .lossCase(lossCase)
-                .qnaQBank(qnaQBank)
                 .build();
 
         return QuestionResponse.from(qRepo.save(q));
+    }
+
+    public QuestionResponse getQuestionByLossCase(Long lossCaseId){
+        QnaQ qnaq= qRepo.findByLossCase_LossCaseId(lossCaseId);
+
+        return QuestionResponse.from(qnaq);
     }
 
     public AnswerResponse addAnswer(Long qId, AnswerCreateRequest req) {

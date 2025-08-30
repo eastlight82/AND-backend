@@ -12,7 +12,7 @@ public record LossCaseDto(
         LocalDate lossDate,
         LossReason lossReason,
         CopeWay copeWay,
-        LossSubjectFamily lossSubjectFamily
+        LossSubjectFamily subjectFamily
 ) {
     public static LossCaseDto of(LossCase entity) {
         return new LossCaseDto(
