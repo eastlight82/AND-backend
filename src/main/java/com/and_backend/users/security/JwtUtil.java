@@ -9,6 +9,8 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;
@@ -16,7 +18,7 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    private final Key key;
+    private final SecretKey key;
     private final long expiration;
 
     public JwtUtil(@Value("${jwt.secret}") String secret,
@@ -38,11 +40,11 @@ public class JwtUtil {
 
     // ✅ 토큰에서 모든 Claims 추출
     public Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
+        return Jwts.parser()
+                .verifyWith(key)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     // ✅ 토큰에서 subject 추출
